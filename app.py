@@ -13,7 +13,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads/images'
 # checking file extension
 EXT = ['jpg', 'jpeg', 'png']
 def allowedFile(filename):
-    return '.' in filename and filename.rsplit('.', 1) in EXT
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in EXT
 
 @app.route('/')
 @app.route('/home')
@@ -32,12 +32,13 @@ def upload():
     if file.filename == '':
         flash('No image selected')
         return redirect(request.url)
-    elif file :#and allowedFile(file.filename):
+    elif file and allowedFile(file.filename):
         file_dir = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
         file.save(file_dir)
         asyncio.set_event_loop(asyncio.new_event_loop())
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(hello())
+        
         info = extractInfo(file_dir)
         name = ', '.join(info.extract_name())
         email = ', '.join(info.extract_email())
@@ -49,4 +50,4 @@ def upload():
         flash('Allowed image extension are jpeg, jpg, png')
         return redirect(request.url)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
