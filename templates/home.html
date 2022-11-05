@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/home.css')}}">
+    <title>OCR</title>
+</head>
+<body>
+    <center>
+        <div class="title">
+            Optical Character Recognition
+        </div>
+    </center> 
+    <div class="main">
+        <div class="card">
+            <div class="top">
+                <p>Drag and drop image inside container</p>
+            </div>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <div class="drag-drop-area">
+                    <span class="inner">
+                        Drag and drop iamge here or
+                        <span class="select">Browse</span>
+                    </span>
+                    <input name="file" type="file" class="file" required/>
+                </div>
+                <center>
+                    <input type="submit" value="Extract" class="generate">
+                </center>
+            </form>
+            <div class="img-container">
+
+            </div>
+            <div class="container">
+                <div class="feature-input">
+                    <label for="Name" class="feature-names">Name: </label> <br>
+                    <input class="input-text" type="text" id = "name" name="name" placeholder="John Doe" value="{{ name }}" ><br>
+                </div>
+                <div class="feature-input">
+                    <label for="Married" class="feature-names">Email Id: </label><br>
+                    <input class="input-text" type="text" id = "email" name="email" placeholder="abc@example.com" value="{{ email }}"><br>
+                </div>
+                <div class="feature-input">
+                    <label for="Contact" class="feature-names">Contact Number: </label><br>
+                    <input class="input-text" type="text" id = "contact" name="contact" placeholder="1234567890" value="{{ contact }}"><br>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <script>
+        let file = [],
+        browse = document.querySelector('.select'),
+        input = document.querySelector('.drag-drop-area input'),
+        dragndrop = document.querySelector('.drag-drop-area'),
+        text = document.querySelector('.inner'),
+        container = document.querySelector('.img-container');
+
+        browse.addEventListener('click', () => input.click());
+        input.addEventListener('change', () => {
+            file[0] = input.files[0];
+            showImages();
+        })
+        const showImages = () => {
+            let images = '';
+            file.forEach((e, i) => {
+                images += `<div class="image">
+                        <img src = "${URL.createObjectURL(e)}" alt="image">
+                        <span onclick="delImage(${i})">&times;</span></div>`
+            })
+            container.innerHTML = images;
+        }
+        const delImage = index => {
+            file.splice(index, 1)
+            showImages()
+        }
+        //drag and drop
+        dragndrop.addEventListener('dragover', e => {
+            e.preventDefault()
+
+            dragndrop.classList.add('dragover')
+            text.innerHTML = 'Drop image here'
+        })
+        dragndrop.addEventListener('dragleave', e => {
+            e.preventDefault()
+
+            dragndrop.classList.remove('dragover')
+            text.innerHTML = `Drag and drop image here or 
+                        <span class="select">Browse</span>`
+        })
+        dragndrop.addEventListener('drop', e =>{
+            e.preventDefault()
+
+            dragndrop.classList.remove('dragover')
+            text.innerHTML = `Drag and drop image here or 
+                        <span class="select">Browse</span>`
+            file[0] = e.dataTransfer.files[0];
+            input.files = e.dataTransfer.files;
+            showImages();
+        })
+    </script>
+</body>
+</html>

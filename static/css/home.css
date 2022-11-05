@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Smooch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
+
+*, ::after, ::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Quicksand', sans-serif; */
+}
+body{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    font-size: 14px;
+    font-family: 'Quicksand', sans-serif;
+    /* background: linear-gradient(315deg, #09203F, #537895); */
+    background: linear-gradient(315deg, #E0D2C7 ,#44B09E);
+}
+.title{
+    font-size: 100px;
+    flex-grow: 1;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+    /* background-color: aliceblue; */
+}
+.card{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 600px;
+    overflow: hidden;
+    height: auto;
+    border-radius: 5px;
+}
+.top{
+    font-size: 29px;
+}
+.drag-drop-area{
+    width: 100%;
+    height: 180px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border: 2px dashed #09203F;
+    background-color:gainsboro;
+    border-radius: 5px;
+    font-weight: 500;
+    width: 400px;
+    margin: 10px;
+}
+.drag-drop-area .select{
+    color: #5256ad;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.drag-drop-area input{
+    display: none;
+}
+.drag-drop-area.dragover{
+    border-style: solid;
+    background-color: rgb(166, 166, 166);
+}
+.img-container .image{
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.img-container .image img{
+    height: 100%;
+    width: 100%;
+}
+.img-container .image span{
+    position: absolute;
+    right: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 40px;
+}
+.img-container .image span:hover{
+    opacity: 85%;
+}
+.input-text{
+    height: 40px;
+    width: 100%;
+}
+.generate {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 25px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #007fa6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+  }
+.generate:hover {
+    background-color: #003747;
+}
+.generate:active {
+    background-color: #007fa6;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
